@@ -4,7 +4,7 @@ const App = () => {
   return (
 
     <>
-        <div>App</div>
+        <div className=' bg-red-700'>App</div>
     </>
   )
 }
