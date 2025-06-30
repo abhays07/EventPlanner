@@ -4,7 +4,7 @@ import Home from './components/Home';
 import { LoginButton } from './components/pages/LoginButton';
 import About from './components/pages/About';
 import Register from './components/pages/Register';
-
+import Bottom from './components/Bottom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Contact from './components/pages/Contact';
 
@@ -14,6 +14,7 @@ const App = () => {
     <>
         <BrowserRouter>
            <Navbar/>
+          
             <Routes>
                <Route path="/" element={<Home/>}/>
                <Route path="/About" element={<About/>}/>
@@ -21,6 +22,7 @@ const App = () => {
                 <Route path="/Register" element={<Register/>}/>
                 <Route path="/Contact" element={<Contact/>}/>
             </Routes>
+            <Bottom/>
         </BrowserRouter>
     </>
   )
