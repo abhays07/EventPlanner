@@ -11,7 +11,7 @@ function Register() {
   const [password, setpassword] = useState();
   const [cpassword, setcpassword] = useState();
 
-  const formsubmit = (e) => {
+  function formsubmit(e) {
     e.preventDefault();
     console.log("fullname", fullname);
     console.log("emaill", emaill);
@@ -23,7 +23,7 @@ function Register() {
     setnumber("");
     setpassword("");
     setcpassword("");
-  };
+  }
 
   const [Register, setregister] = useState({
     fullname: "",
