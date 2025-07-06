@@ -1,6 +1,6 @@
 import User from "../models/usermodel.js";
 import bcrypt from "bcrypt";
-
+import genToken from "../utils/auth.js";
 export const RegisterUser = async(req, res,next)=>{
    try {
          const {fullname, emaill,number, password, cpassword}=req.body;
@@ -29,7 +29,7 @@ export const RegisterUser = async(req, res,next)=>{
         password : hashedPassword,
         cpassword : hashedcPassword,
     });
-    res.status(201).json({Message:"Registration Successfull"})
+    res.status(201).json({message:"Registration Successfull"})
    } catch (error) {
         next(error);
    }
@@ -60,7 +60,8 @@ export const LoginUser = async (req, res,next)=>{
         error.statusCode=401;
         return next(error);   
     }
-    res.status(200).json({message:`Welcome back  ${user.fullname}`,data:user})
+    genToken(user._id,res);
+    res.status(200).json({message:`Welcome back ${user.fullname}`,data:user})
         
     } catch (error) {
          next(error);

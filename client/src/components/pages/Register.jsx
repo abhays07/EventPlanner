@@ -1,30 +1,10 @@
 import React from "react";
+import api from "../../config/api";
 import bg from "../pages/image/bg-homepage.png";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 function Register() {
-
-
-  const [fullname, setfullname] = useState();
-  const [emaill, setemaill] = useState();
-  const [number, setnumber] = useState();
-  const [password, setpassword] = useState();
-  const [cpassword, setcpassword] = useState();
-
-  function formsubmit(e) {
-    e.preventDefault();
-    console.log("fullname", fullname);
-    console.log("emaill", emaill);
-    console.log("number", number);
-    console.log("password", password);
-    console.log("cpassword", cpassword);
-    setfullname("");
-    setemaill("");
-    setnumber("");
-    setpassword("");
-    setcpassword("");
-  }
-
   const [Register, setregister] = useState({
     fullname: "",
     emaill: "",
@@ -33,23 +13,31 @@ function Register() {
     cpassword: "",
   });
 
-  
-
   const handlechange = (e) => {
     const { name, value } = e.target;
     setregister((previousdata) => ({ ...previousdata, [name]: value }));
   };
 
-  const handelsubmit = (e) => {
+  const handelsubmit = async (e) => {
     e.preventDefault();
     console.log(Register);
-    setregister({
-      fullname: "",
-      emaill: "",
-      number: "",
-      password: "",
-      cpassword: "",
-    });
+    try {
+      const res = await api.post("/auth/register", Register);
+      toast.success(res.data.message);
+      setregister({
+        fullname: "",
+        emaill: "",
+        number: "",
+        password: "",
+        cpassword: "",
+      });
+    } catch (error) {
+      toast.error(
+        `Error : ${error.response?.status || error.message} ${
+          error.response?.data.message || ""
+        }`
+      );
+    }
   };
 
   return (
@@ -73,7 +61,7 @@ function Register() {
               className="text-black p-2 rounded-sm w-75 border-b-2 mt-7 ml-30 bg-white"
               type="email"
               name="emaill"
-                value={Register.emaill}
+              value={Register.emaill}
               onChange={handlechange}
               placeholder="Enter your email"
             />
@@ -81,7 +69,7 @@ function Register() {
               className="text-black p-2 rounded-sm w-75 border-b-2 mt-7 ml-30 bg-white"
               type="tel"
               name="number"
-                value={Register.number}
+              value={Register.number}
               onChange={handlechange}
               placeholder="Enter your phone number"
             />
@@ -89,7 +77,7 @@ function Register() {
               className="text-black p-2 rounded-sm w-75 border-b-2 mt-7 ml-30 bg-white"
               type="password"
               name="password"
-                value={Register.password}
+              value={Register.password}
               onChange={handlechange}
               placeholder="Enter your password"
             />
@@ -97,12 +85,15 @@ function Register() {
               className="text-black p-2 rounded-sm w-75 border-b-2 mt-7 ml-30 bg-white"
               type="password"
               name="cpassword"
-                value={Register.cpassword}
+              value={Register.cpassword}
               onChange={handlechange}
               placeholder="Confirm your password"
             />
             <div>
-              <button className=" bg-white p-2 text-red-800 ml-48 mt-10 rounded-sm w-40 h-10 text-lg" onClick={handelsubmit}>
+              <button
+                className=" bg-white p-2 text-red-800 ml-48 mt-10 rounded-sm w-40 h-10 text-lg"
+                onClick={handelsubmit}
+              >
                 Register Now
               </button>
             </div>

@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+import api from "../../config/api";
 import bg from "../pages/image/bg-homepage.png";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const LoginButton = () => {
-  const [email, setemail] = useState();
+
+  const navigate = useNavigate()
+
+  const [emaill, setemail] = useState();
   const [password, setpassword] = useState();
 
-  const formsubmit = (e) => {
-    e.preventDefault();
-    console.log("name", email);
-    console.log("password", password);
-    setemail("");
-    setpassword("");
-  };
-
   const [Registerdata, setregisterdata] = useState({
-    email: "",
+    emaill: "",
     password: "",
   });
 
@@ -23,14 +21,25 @@ export const LoginButton = () => {
     setregisterdata((previousdata) => ({ ...previousdata, [name]: value }));
   };
 
-  const handelsubmit = (e) => {
+  const handelsubmit = async (e) => {
     e.preventDefault();
     console.log(Registerdata);
-    setregisterdata({
-      email: "",
-      password: "",
-    });
-  };
+    try {
+          const res = await api.post("/auth/login", Registerdata);
+          toast.success(res.data.message);
+      emaill: "";
+      password: "";
+      navigate("/UserDashboard");
+        } catch (error) {
+          toast.error(
+        `Error : ${error.response?.status || error.message} ${
+          error.response?.data.message || ""
+        }`
+      );
+        }
+      };
+    
+  
   return (
     <>
       <div className="">
@@ -43,8 +52,8 @@ export const LoginButton = () => {
             <input
               className="text-black p-2 rounded-sm w-70 border-b-2 mt-10 ml-25 bg-white"
               type="email"
-              name="email"
-              value={Registerdata.email}
+              name="emaill"
+              value={Registerdata.emaill}
               placeholder="Enter your email"
               onChange={handlechange}
             />
