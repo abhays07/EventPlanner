@@ -6,14 +6,18 @@ import morgan from "morgan";
 import cors from "cors";
 import connectDB from "./src/config/db.js";
 import Authrouter from "./src/routes/authroutes.js";
+import UserRouter from "./src/routes/userRoutes.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use("/auth", Authrouter);
+app.use("/user", UserRouter)
 
 app.get("/", (req, res) => {
   res.json({ message: "Server Connected" });

@@ -1,4 +1,3 @@
-import React from "react";
 import contact from "../pages/image/contactus.png";
 import loc from "../pages/image/location.png";
 import email from "../pages/image/email.png";
@@ -44,21 +43,21 @@ function Contact() {
             <span className="text-6xl text-white">Enquire Now</span>
             <div>
               <input
-                className="text-black h-10 p-1 text-xl  w-130 border-b-2  mt-15 outline-none text-white"
+                className=" h-10 p-1 text-xl  w-130 border-b-2  mt-15 outline-none text-white"
                 type="text"
                 placeholder="Name"
               />
             </div>
             <div>
               <input
-                className="text-black h-10 p-1 text-xl  w-130 border-b-2  mt-10 outline-none text-white"
+                className=" h-10 p-1 text-xl  w-130 border-b-2  mt-10 outline-none text-white"
                 type="tel"
                 placeholder="Phone"
               />
             </div>
             <div>
               <input
-                className="text-black h-10 p-1 text-xl  w-130 border-b-2  mt-10 outline-none text-white"
+                className=" h-10 p-1 text-xl  w-130 border-b-2  mt-10 outline-none text-white"
                 type="email"
                 placeholder="Email"
               />
