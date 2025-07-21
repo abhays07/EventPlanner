@@ -3,12 +3,14 @@ import api from "../../config/api";
 import bg from "../pages/image/bg-homepage.png";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export const LoginButton = () => {
 
   const navigate = useNavigate()
+  // const {user,setUser, isLogin, setIsLogin, isAdmin, setIsAdmin, }
 
-  const [emaill, setemail] = useState();
+   const [emaill, setemail] = useState();
   const [password, setpassword] = useState();
 
   const [Registerdata, setregisterdata] = useState({
@@ -29,7 +31,13 @@ export const LoginButton = () => {
           toast.success(res.data.message);
       emaill: "";
       password: "";
-      navigate("/UserDashboard");
+      setUser(res.data.data)
+      setIsLogin(true)
+      res.data.data.role === "Admin"?(setIsAdmin(true), navigate("/adminpanel")):navigate("/CustomerDashboard");
+
+      
+      
+      // navigate("/CustomerDashboard");
         } catch (error) {
           toast.error(
         `Error : ${error.response?.status || error.message} ${
@@ -67,7 +75,7 @@ export const LoginButton = () => {
             />
             <div>
               <button
-                className=" bg-white p-2 text-red-800 ml-40 mt-10 rounded-sm w-40 h-10 text-lg "
+                className=" cursor-pointer bg-white p-2 text-red-800 ml-40 mt-10 rounded-sm w-40 h-10 text-lg "
                 type="submit"
                 onClick={handelsubmit}
               >

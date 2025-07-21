@@ -7,7 +7,10 @@ import cors from "cors";
 import connectDB from "./src/config/db.js";
 import Authrouter from "./src/routes/authroutes.js";
 import UserRouter from "./src/routes/userRoutes.js";
+import publicRouter from "./src/routes/public.js"
 import cookieParser from "cookie-parser";
+import cloudinary from "./src/config/cloudinary.js";
+
 
 const app = express();
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -17,7 +20,8 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use("/auth", Authrouter);
-app.use("/user", UserRouter)
+app.use("/user", UserRouter);
+app.use("/public", publicRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "Server Connected" });
@@ -30,7 +34,14 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log("Server started at", port);
-  connectDB();
+   try {
+    await connectDB();
+    await cloudinary.api.resources({ max_results: 1 });
+    console.log("Cloudinary Connected");
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
 });

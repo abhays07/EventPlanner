@@ -8,7 +8,10 @@ import {Toaster} from "react-hot-toast";
 import Bottom from './components/Bottom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Contact from './components/pages/Contact';
-import UserDashboard from './components/pages/userDashboard';
+import UserDashboardEdit from './components/pages/userDashboardEdit';
+// import UserDashboard from './components/pages/UserDashboard';
+import CustomerDashboard from './components/pages/CustomerDashboard';
+import AdminPanel from './components/pages/AdminPanel';
 
 const App = () => {
   return (
@@ -24,7 +27,9 @@ const App = () => {
                <Route path="/LoginButton" element={<LoginButton/>}/>
                 <Route path="/Register" element={<Register/>}/>
                 <Route path="/Contact" element={<Contact/>}/>
-                <Route path="/UserDashboard" element={<UserDashboard/>}/>
+                <Route path="/userDashboardEdit" element={<UserDashboardEdit />} />
+                <Route path="/CustomerDashboard" element={<CustomerDashboard/>}/>
+                <Route path="/AdminPanel" element={<AdminPanel/>}/>
             </Routes>
             <Bottom/>
         </BrowserRouter>

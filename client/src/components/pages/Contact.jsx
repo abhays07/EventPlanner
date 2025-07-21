@@ -3,8 +3,46 @@ import loc from "../pages/image/location.png";
 import email from "../pages/image/email.png";
 import phone from "../pages/image/phone.png";
 import chat from "../pages/image/chat.png";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import api from "../../config/api";
 
 function Contact() {
+
+  const [ContactUs, setContactUs] = useState({
+    name:"",
+    number:"",
+    email:"",
+    type:"",
+    description:"",
+    });
+
+    const handlechange = (e) => {
+    const { name, value } = e.target;
+    setContactUs((previousdata) => ({ ...previousdata, [name]: value }));
+    };
+
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+    console.log(ContactUs);
+    try {
+      const res = await api.post("/public/contactUs", ContactUs);
+      toast.success(res.data.message);
+      setContactUs({
+        name: "",
+        number: "",
+        email: "",
+        type: "",
+        description: "",
+      });
+    } catch (error) {
+      toast.error(
+        `Error : ${error.response?.status || error.message} ${
+          error.response?.data.message || ""
+        }`
+      );
+    }
+  };
   return (
     <>
       <div className="">
@@ -46,6 +84,9 @@ function Contact() {
                 className=" h-10 p-1 text-xl  w-130 border-b-2  mt-15 outline-none text-white"
                 type="text"
                 placeholder="Name"
+                name="name"
+                value={ContactUs.name}
+                onChange={handlechange}
               />
             </div>
             <div>
@@ -53,6 +94,9 @@ function Contact() {
                 className=" h-10 p-1 text-xl  w-130 border-b-2  mt-10 outline-none text-white"
                 type="tel"
                 placeholder="Phone"
+                name="number"
+                value={ContactUs.number}
+                onChange={handlechange}
               />
             </div>
             <div>
@@ -60,40 +104,54 @@ function Contact() {
                 className=" h-10 p-1 text-xl  w-130 border-b-2  mt-10 outline-none text-white"
                 type="email"
                 placeholder="Email"
+                name="email"
+                value={ContactUs.email}
+                onChange={handlechange}
               />
             </div>
             <div className="mt-10 w-130 text-xl">
               <select
-                name=""
+                name="type"
+                value={ContactUs.type}
+                onChange={handlechange}
                 className=" cursor-pointer w-130 p-1 text-white border-b-2 outline-white"
-                id=""
+                
+                
               >
                 <option className="" value="">
                   Event Type
                 </option>
-                <option className="text-black" value="">
+                <option className="text-black" value="wedding">
                   Wedding
                 </option>
-                <option className="text-black" value="">
+                <option className="text-black" value="birthday">
                   Birthday Party
                 </option>
-                <option className="text-black" value="">
+                <option className="text-black" value="farewell">
                   Farewell Party
                 </option>
-                <option className="text-black" value="">
+                <option className="text-black" value="reception">
                   Reception Party
                 </option>
-                <option className="text-black" value="">
+                <option className="text-black" value="others">
                   Any Other Event
                 </option>
               </select>
             </div>
             <div>
-              <textarea className=" w-130 mt-10 text-white outline-none p-2 text-xl border-b-2" placeholder="Description" name="" id=""></textarea>
+              <textarea
+                className=" w-130 mt-10 text-white outline-none p-2 text-xl border-b-2"
+                placeholder="Description"
+                name="description"
+              
+                value={ContactUs.description}
+                onChange={handlechange}
+              ></textarea>
             </div>
             <div>
-                     <button className=' absolute cursor-pointer bg-white w-60 h-12 mt-15  rounded-xl text-center text-black  hover:bg-amber-400  hover:text-white'>Send Message</button>
-                  
+              <button onClick={handlesubmit} className=" absolute cursor-pointer bg-white w-60 h-12 mt-15  rounded-xl text-center text-black  hover:bg-amber-400  hover:text-white">
+                Send Message
+              </button>
             </div>
           </div>
         </div>

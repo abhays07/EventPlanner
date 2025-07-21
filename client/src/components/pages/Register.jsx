@@ -81,14 +81,14 @@ function Register() {
               onChange={handlechange}
               placeholder="Enter your password"
             />
-            <input
+             <input
               className="text-black p-2 rounded-sm w-75 border-b-2 mt-7 ml-30 bg-white"
               type="password"
               name="cpassword"
               value={Register.cpassword}
               onChange={handlechange}
               placeholder="Confirm your password"
-            />
+            /> 
             <div>
               <button
                 className=" bg-white p-2 text-red-800 ml-48 mt-10 rounded-sm w-40 h-10 text-lg"

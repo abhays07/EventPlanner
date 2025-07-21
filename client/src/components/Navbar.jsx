@@ -15,10 +15,9 @@ const Navbar = () => {
                        <Link to="/Gallery">Gallery</ Link>
                        <Link to="/Elements">Elements</ Link>
                        <Link to="/Contact">Contact</ Link>
-
                 </div>
         </>
   )
 }
 
-export default Navbar
+export default Navbar;
