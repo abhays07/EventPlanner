@@ -3,8 +3,10 @@ import api from "../../config/api";
 import bg from "../pages/image/bg-homepage.png";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-function Register() {
+const Register = ()=>{
+  const navigate = useNavigate();
   const [Register, setregister] = useState({
     fullname: "",
     emaill: "",
@@ -91,7 +93,7 @@ function Register() {
             /> 
             <div>
               <button
-                className=" bg-white p-2 text-red-800 ml-48 mt-10 rounded-sm w-40 h-10 text-lg"
+                className=" cursor-pointer bg-white p-2 text-red-800 ml-48 mt-10 rounded-sm w-40 h-10 text-lg  hover:bg-amber-300 "
                 onClick={handelsubmit}
               >
                 Register Now

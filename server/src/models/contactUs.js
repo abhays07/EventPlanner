@@ -6,7 +6,7 @@ const contactUsSchema = mongoose.Schema(
       type: String,
       required:true,
     },
-    number: {
+    phone: {
       type: String,
       required: true,
     },
@@ -14,16 +14,21 @@ const contactUsSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    type: {
-      type: String,
-      enum:["wedding", "birthday", "reception", "farewell", "others"],
-      default:"others",
-    },
-    description: {
+    subject: {
       type: String,
       required: true,
     },
-
+    message: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["Pending", "Resolved", "Rejected"],
+      default: "Pending",
+      required: true,
+    },
+    reply: { type: String },
   },
   { timestamps: true }
 );

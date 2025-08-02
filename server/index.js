@@ -7,9 +7,11 @@ import cors from "cors";
 import connectDB from "./src/config/db.js";
 import Authrouter from "./src/routes/authroutes.js";
 import UserRouter from "./src/routes/userRoutes.js";
-import publicRouter from "./src/routes/public.js"
+import publicRouter from "./src/routes/public.js";
+import AdminRouter from "./src/routes/adminRoutes.js"
 import cookieParser from "cookie-parser";
 import cloudinary from "./src/config/cloudinary.js";
+
 
 
 const app = express();
@@ -22,6 +24,7 @@ app.use(morgan("dev"));
 app.use("/auth", Authrouter);
 app.use("/user", UserRouter);
 app.use("/public", publicRouter);
+app.use("/admin", AdminRouter) 
 
 app.get("/", (req, res) => {
   res.json({ message: "Server Connected" });

@@ -53,7 +53,7 @@ const Profile = () => {
     <div className="w-full md:w-[35%] bg-white rounded-2xl shadow-lg p-6 border border-red-200 flex flex-col items-center gap-6">
       <img
         className="w-48 h-48 rounded-full border-4 text-pink-500 object-cover shadow-md"
-        src={userdata.photo}
+        src={userdata.picture}
         alt="Profile"
       />
       <div className="flex flex-col gap-4 text-lg w-full">

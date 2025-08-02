@@ -24,10 +24,11 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    photo: {
+    picture: {
       type: String,
       required: true,
       default: "",
+      
     },
     gender: {
       type: String,

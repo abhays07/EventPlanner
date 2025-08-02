@@ -8,7 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 export const LoginButton = () => {
 
   const navigate = useNavigate()
-  // const {user,setUser, isLogin, setIsLogin, isAdmin, setIsAdmin, }
+  const {user,setUser, isLogin, setIsLogin, isAdmin, setIsAdmin, } = useAuth();
 
    const [emaill, setemail] = useState();
   const [password, setpassword] = useState();
@@ -25,19 +25,16 @@ export const LoginButton = () => {
 
   const handelsubmit = async (e) => {
     e.preventDefault();
-    console.log(Registerdata);
+    //console.log(Registerdata);
     try {
-          const res = await api.post("/auth/login", Registerdata);
-          toast.success(res.data.message);
+      const res = await api.post("/auth/login", Registerdata);
+      toast.success(res.data.message);
       emaill: "";
       password: "";
       setUser(res.data.data)
       setIsLogin(true)
       res.data.data.role === "Admin"?(setIsAdmin(true), navigate("/adminpanel")):navigate("/CustomerDashboard");
 
-      
-      
-      // navigate("/CustomerDashboard");
         } catch (error) {
           toast.error(
         `Error : ${error.response?.status || error.message} ${

@@ -7,15 +7,30 @@ import {
   FaCommentDots,
 } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
+import api from "../../config/api";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Sidebar = ({ active, setactive }) => {
-  const navItems = [
+  const { setUser, setIsLogin, setIsAdmin } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    const res = await api.get("/auth/logout");
+    setUser("");
+    sessionStorage.removeItem("EventUser");
+    setIsLogin(false);
+    setIsAdmin(false);
+    navigate("/");
+  };
+  
+   const navItems = [
     { id: "overview", label: "Overview", icon: <FaRegChartBar /> },
     { id: "Bookings", label: "Bookings", icon: <FaBookOpen /> },
     { id: "Profile", label: "Profile", icon: <FaUserCircle /> },
     { id: "Support", label: "Support", icon: <FaLifeRing /> },
     { id: "Feedback", label: "Feedback", icon: <FaCommentDots /> },
   ];
+
 
   return (
     <div className="w-100 min-h-[87vh] p-6 bg-white border-r shadow-sm flex flex-col justify-between">
@@ -48,8 +63,8 @@ const Sidebar = ({ active, setactive }) => {
       {/* Logout */}
       <div>
         <button
-          className="w-full flex items-center justify-center gap-3 px-4 py-3 text-lg font-semibold border border-red-500 text-red-500 rounded-lg hover:bg-gradient-to-r from-pink-600 to-purple-600 hover:text-white transition duration-200"
-          onClick={() => console.log("Logout Clicked")}
+          className="w-full cursor-pointer flex items-center justify-center gap-3 px-4 py-3 text-lg font-semibold border border-red-500 text-red-500 rounded-lg hover:bg-gradient-to-r from-pink-600 to-purple-600 hover:text-white transition duration-200"
+          onClick={handleLogout}
         >
           <FiLogOut />
           Logout

@@ -5,9 +5,9 @@ function Bottom() {
   return (
     <>
          
-             <div className=" h-130 w-full bg-pink-500">
+             <div>
                 
-                <img className=" w-full " src={bottom} alt="" />
+                  
 
               </div>
          

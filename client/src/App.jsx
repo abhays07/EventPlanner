@@ -9,7 +9,6 @@ import Bottom from './components/Bottom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Contact from './components/pages/Contact';
 import UserDashboardEdit from './components/pages/userDashboardEdit';
-// import UserDashboard from './components/pages/UserDashboard';
 import CustomerDashboard from './components/pages/CustomerDashboard';
 import AdminPanel from './components/pages/AdminPanel';
 
@@ -25,11 +24,11 @@ const App = () => {
                <Route path="/" element={<Home/>}/>
                <Route path="/About" element={<About/>}/>
                <Route path="/LoginButton" element={<LoginButton/>}/>
-                <Route path="/Register" element={<Register/>}/>
+                <Route path="/register" element={<Register/>}/>
                 <Route path="/Contact" element={<Contact/>}/>
                 <Route path="/userDashboardEdit" element={<UserDashboardEdit />} />
                 <Route path="/CustomerDashboard" element={<CustomerDashboard/>}/>
-                <Route path="/AdminPanel" element={<AdminPanel/>}/>
+                <Route path="/adminPanel" element={<AdminPanel/>}/>
             </Routes>
             <Bottom/>
         </BrowserRouter>
@@ -37,4 +36,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;

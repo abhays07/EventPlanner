@@ -22,9 +22,7 @@ export const RegisterUser = async (req, res, next) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const profilePic = `https://placehold.co/600x400?text=${fullname
-      .charAt(0)
-      .toUpperCase()}`;
+    const profilePic = `https://placehold.co/600x400?text=${fullname.charAt(0).toUpperCase()}`;
     if (existingUser && existingUser.status === "Inactive") {
       existingUser.fullName = fullname;
       existingUser.password = hashedPassword;
